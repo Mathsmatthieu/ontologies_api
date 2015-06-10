@@ -28,7 +28,6 @@ class AnnotatorController < ApplicationController
 
       text = params_copy.delete("text")
       text = remove_accent(text)
-      reply 200, text
       error 400, 'A text to be annotated must be supplied using the argument text=<text to be annotated>' if text.nil? || text.strip.empty?
 
       acronyms = restricted_ontologies_to_acronyms(params_copy)
