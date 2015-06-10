@@ -28,6 +28,7 @@ class AnnotatorController < ApplicationController
 
       text = params_copy.delete("text")
       text = remove_accent(text)
+      reply 200, text
       error 400, 'A text to be annotated must be supplied using the argument text=<text to be annotated>' if text.nil? || text.strip.empty?
 
       acronyms = restricted_ontologies_to_acronyms(params_copy)
@@ -105,7 +106,7 @@ class AnnotatorController < ApplicationController
 
     # A little method to remove all accent before querying the annotator
     def remove_accent(val)
-      val = val.gsub(/[éèêë]/, "E").gsub(/[àâäã]/, "A").gsub(/[ùúûü]/, "U").gsub(/[ôóõö]/, "O").gsub(/[îïíì]/, "I").gsub("ç", "C").gsub("ñ", "N")
+      val = val.gsub(/[éèêë]/, "e").gsub(/[àâäã]/, "a").gsub(/[ùúûü]/, "u").gsub(/[ôóõö]/, "o").gsub(/[îïíì]/, "i").gsub("ç", "c").gsub("ñ", "n")
       return val
     end
 
